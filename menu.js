@@ -1,99 +1,71 @@
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', ()=> {
   document.getElementById('yearMenu').textContent = new Date().getFullYear();
 
-  // price map based on provided updated menu prices
   const priceMap = {
-    // Brunch
-    'Chilaquiles':'$14.50',
-    'Tres Leches French Toast':'$12.00',
-    'Huevos Rancheros':'$14.50',
-    'Waffle':'$8.00',
-    'Breaky Sando':'$13.50',
-    'Korean Chicken and Waffles':'$14.50',
-    'Avocado Toast':'$10.50',
-    // Street Tacos
-    'Taco de Asada':'$3.25',
     'Quesa-Birria':'$5.00',
-    'TJ Shrimp Taco':'$4.00',
-    'Korean Pork Taco':'$4.00',
-    'Sriracha Chicken Taco':'$3.50',
-    'Brussel Sprout Taco':'$3.50',
-    'Al Pastor':'$3.50',
-    'Surf and Turf':'$4.00',
     'Quesa Taco':'$4.00',
-    // Burritos
-    'Nashville Chicken Burrito':'$13.50',
-    'Chilango Burrito':'$14.50',
-    'Asada Burrito':'$13.00',
-    'Surf and Turf Burrito':'$14.50',
-    // Veg / Sides
-    'Elote Bites (3)':'$8.00',
-    'Kimchi Brussel Sprouts':'$9.00',
-    'Korean Esquites':'$8.00',
-    // Noodles
-    'Chipotle Miso Ramen':'$16.50',
-    'Dan Dan Noodles':'$16.00',
-    'Loaded Mac & Cheese':'$15.00',
-    'Spicy Shrimp Fried Rice':'$14.00',
-    // Handhelds
-    'Burger':'$13.50',
-    'Bang Bang Chicken Sando':'$14.00',
-    'Spicy Korean Chicken Sando':'$14.00',
-    'Birria Torta':'$13.50',
-    'Make Your Own':'$13.50',
     'Barbacoa Melt':'$13.50',
-    // Desserts
-    'ChocoFlan':'$6.00',
-    'Tres Leches Cake':'$7.00',
-    // Fries / fry-sides
-    'Side of Fries':'$3.50',
-    'Tater Tots':'$4.00',
-    'Papas A La Mexicana (Large)':'$11.00',
-    'Papas A La Mexicana (Small)':'$5.50',
-    'Elote Tots (Large)':'$10.00',
-    'Elote Tots (Small)':'$5.00',
-    'Rangoon Fries (Large)':'$10.00',
-    'Rangoon Fries (Small)':'$5.00',
+    'Birria Eggrolls':'$14.00',
+    'Bang Bang Chicken Sando':'$14.00',
+    'Breakfast Burrito':'$12.50',
+    'Nashville Hot Chicken Burrito':'$13.50',
+    'Cheesy Rice Bowl':'$14.00',
     'Chori-Queso Fries (Large)':'$10.00',
-    'Chori-Queso Fries (Small)':'$5.00',
-    // Food truck simplified items
-    'Tacos Asada':'$3.00',
-    'Tacos Korean Pork':'$3.00',
-    'Tacos Quesabirria':'$3.00',
-    'Tacos Sriracha Chicken':'$3.00',
-    'Bang Bang Chicken Sando (Truck)':'$13.50',
-    'Nashville Burrito (Truck)':'$13.00',
-    'Quesadilla (Truck)':'$12.00',
-    'Rangoon Fries (Truck)':'$9.00',
-    'Asada Fries (Truck)':'$9.00'
+    'Loaded Fries':'$9.50',
+    'Crab Rangoon Fries':'$10.00',
+    'Mango Margarita':'$8.50',
+    'Tres Leches Cake':'$7.00',
+    'Sweet Corn Crème Brûlée':'$6.50',
+    'Birria Benny Sub Chorizo':'$12.50',
+    'Chilaquiles with Red and Green Sauce':'$14.50',
+    'Elota Balls':'$8.00',
+    'Vanilla Pancakes':'$9.00',
+    'Candied Walnuts':'$5.00',
+    'Rangoon Fries':'$9.50'
   };
 
   const sample = (name, img) => {
-    const price = priceMap[name] || priceMap[name.replace(/\s*\(.*\)/,'')] || '$12.99';
+    const price = priceMap[name] || '$12.99';
     return {name, img, price, desc:'Generous portion with signature sauce.'};
   };
 
-  // ---- Updated image paths (no leading slash, no spaces) ----
+  // only include items for which images exist
   const tacos = [
     sample('Quesa-Birria','Quesa-Birria-Taco.jpg'),
     sample('Quesa Taco','Quesa-Taco.jpg'),
     sample('Barbacoa Melt','Barbacoa-Melt.jpg'),
-    sample('Birria Eggrolls','Birria-Eggrolls.jpg'),
+    sample('Birria Eggrolls','Birria-Eggrolls.jpg')
   ];
+
   const burritos = [
-    sample('Classic Burrito','Breakfast-Burrito.jpg'),
-    sample('Nashville Chicken Burrito','Nashville-Hot-Chicken-Burrito.jpg'),
+    sample('Breakfast Burrito','Breakfast-Burrito.jpg'),
+    sample('Nashville Hot Chicken Burrito','Nashville-Hot-Chicken-Burrito.jpg')
   ];
+
+  const handhelds = [
+    sample('Bang Bang Chicken Sando','Bang-Bang-Chicken-Sando.jpg'),
+    sample('Birria Benny Sub Chorizo','Birria-Benny-Sub-Chorizo.jpg')
+  ];
+
   const bowls = [
     sample('Cheesy Rice Bowl','Cheesy-Ramen.jpg')
   ];
+
   const sides = [
     sample('Chori-Queso Fries (Large)','Chori-Queso-Fries.jpg'),
-    sample('Loaded Fries','Loaded-Fries.jpg')
+    sample('Loaded Fries','Loaded-Fries.jpg'),
+    sample('Crab Rangoon Fries','Crab-Rangoon-Fries.jpg'),
+    sample('Rangoon Fries','Rangoon-Fries.jpg'),
+    sample('Elota Balls','Elota-Balls.jpg')
   ];
-  const specials = [
-    sample('Bang Bang Chicken Sando','Bang-Bang-Chicken-Sando.jpg')
+
+  const desserts = [
+    sample('Tres Leches Cake','Tres-Leches-Cake.jpg'),
+    sample('Sweet Corn Crème Brûlée','Sweet-Corn-Creme-Brulee.jpg'),
+    sample('Vanilla Pancakes','Vanilla-Pancakes.jpg'),
+    sample('Candied Walnuts','Candied-Walnuts.jpg')
   ];
+
   const drinks = [
     sample('Mango Margarita','Mango-Margarita.jpg')
   ];
@@ -103,15 +75,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
     list.forEach(item=>{
       const card = document.createElement('div');
       card.className='feature-card';
-      card.innerHTML = `<img src="${item.img}" alt="${item.name}" /><h4>${item.name} <span style="float:right;color:var(--gold)">${item.price}</span></h4><p style="color:var(--muted)">${item.desc}</p>`;
+      card.innerHTML = `
+        <img src="${item.img}" alt="${item.name}" />
+        <h4>${item.name} <span style="float:right;color:var(--gold)">${item.price}</span></h4>
+        <p style="color:var(--muted)">${item.desc}</p>
+      `;
       el.appendChild(card);
     });
   }
 
   renderList(tacos, 'tacosGrid');
   renderList(burritos, 'burritosGrid');
+  renderList(handhelds, 'specialsGrid'); // reuse specialsGrid for handhelds
   renderList(bowls, 'bowlsGrid');
   renderList(sides, 'sidesGrid');
-  renderList(specials, 'specialsGrid');
+  renderList(desserts, 'dessertsGrid'); // you may need to add this div in menu.html
   renderList(drinks, 'drinksGrid');
 });
