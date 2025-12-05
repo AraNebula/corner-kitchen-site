@@ -1,15 +1,15 @@
 const dishes = [
-  {name:'Quesa-Birria Taco', tag:'Quesa-Birria', img:'Quesa-Birria Taco.jpg'},
-  {name:'Barbacoa Melt', tag:'Barbacoa', img:'Barbacoa Melt.jpg'},
-  {name:'Birria Eggrolls', tag:'Birria', img:'Birria Eggrolls.jpg'},
-  {name:'Chori Queso Fries', tag:'Choriqueso', img:'Chori Queso Fries.jpg'},
-  {name:'Nashville Hot Chicken', tag:'Nashville Hot', img:'Nashville Hot Chicken Burrito.jpg'},
-  {name:'Bang Bang Chicken Sando', tag:'Bang Bang', img:'Bang Bang Chicken Sando.jpg'},
-  {name:'Loaded Fries', tag:'Fries', img:'Loaded Fries.jpg'},
-  {name:'Crab Rangoon Fries', tag:'Rangoon', img:'Crab Rangoon Fries.jpg'},
-  {name:'Sweet Corn Crème Brûlée', tag:'Dessert', img:'Sweet Corn Creme Brulee.jpg'},
-  {name:'Tres Leches Cake', tag:'Dessert', img:'Tres Leches Cake.jpg'},
-  {name:'Mango Margarita', tag:'Drink', img:'Mango Margarita.jpg'}
+  {name:'Quesa-Birria Taco', tag:'Quesa-Birria', img:'Quesa-Birria-Taco.jpg'},
+  {name:'Barbacoa Melt', tag:'Barbacoa', img:'Barbacoa-Melt.jpg'},
+  {name:'Birria Eggrolls', tag:'Birria', img:'Birria-Eggrolls.jpg'},
+  {name:'Chori Queso Fries', tag:'Choriqueso', img:'Chori-Queso-Fries.jpg'},
+  {name:'Nashville Hot Chicken', tag:'Nashville Hot', img:'Nashville-Hot-Chicken-Burrito.jpg'},
+  {name:'Bang Bang Chicken Sando', tag:'Bang Bang', img:'Bang-Bang-Chicken-Sando.jpg'},
+  {name:'Loaded Fries', tag:'Fries', img:'Loaded-Fries.jpg'},
+  {name:'Crab Rangoon Fries', tag:'Rangoon', img:'Crab-Rangoon-Fries.jpg'},
+  {name:'Sweet Corn Crème Brûlée', tag:'Dessert', img:'Sweet-Corn-Creme-Brulee.jpg'},
+  {name:'Tres Leches Cake', tag:'Dessert', img:'Tres-Leches-Cake.jpg'},
+  {name:'Mango Margarita', tag:'Drink', img:'Mango-Margarita.jpg'}
 ];
 
 document.addEventListener('DOMContentLoaded', ()=> {
@@ -60,81 +60,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
     featured.appendChild(card);
   });
 
-  // Lazy load map iframe on demand
-  const orderBtns = document.querySelectorAll('#orderBtn, #heroOrder, #menuOrderBtn');
-  const mapModal = document.getElementById('mapModal');
-  const mapEmbed = document.getElementById('mapEmbed');
-  const modalClose = document.getElementById('modalClose');
-
-  function fallbackOpen(url){
-    window.open(url, '_blank', 'noopener');
-    mapModal.classList.add('hidden');
-  }
-
-  orderBtns.forEach(b=>{
-    b.addEventListener('click', (e)=>{
-      e.preventDefault();
-      const url = b.dataset.orderUrl || b.getAttribute('href');
-      if(!url) return fallbackOpen('https://www.clover.com/online-ordering/corner-kitchen-south-omaha');
-
-      try {
-        const parsed = new URL(url, window.location.href);
-        if (parsed.hostname.includes('clover.com')) {
-          return fallbackOpen(url);
-        }
-      } catch (err) {}
-
-      mapModal.classList.remove('hidden');
-      mapEmbed.innerHTML = '';
-
-      const iframe = document.createElement('iframe');
-      iframe.src = url;
-      iframe.loading = 'lazy';
-      iframe.style.width = '100%';
-      iframe.style.height = '640px';
-      iframe.style.border = '0';
-      iframe.referrerPolicy = 'no-referrer';
-      iframe.sandbox = '';
-
-      let loaded = false;
-      const loadTimeout = 1800;
-
-      iframe.addEventListener('load', () => {
-        loaded = true;
-        try {
-          const cw = iframe.contentWindow;
-          if (cw && typeof cw.location !== 'undefined') {
-            iframe.removeAttribute('sandbox');
-          }
-        } catch (err) {}
-      });
-
-      mapEmbed.appendChild(iframe);
-
-      const t = setTimeout(() => {
-        if (!loaded) {
-          mapEmbed.innerHTML = '';
-          fallbackOpen(url);
-        }
-      }, loadTimeout);
-
-      const cleanup = () => {
-        clearTimeout(t);
-        mapEmbed.innerHTML = '';
-        mapModal.classList.add('hidden');
-        modalClose.removeEventListener('click', cleanup);
-        mapModal.removeEventListener('click', outsideClick);
-      };
-
-      modalClose.addEventListener('click', cleanup);
-      const outsideClick = (e) => { if (e.target === mapModal) cleanup(); };
-      mapModal.addEventListener('click', outsideClick);
-    });
-  });
-
-  modalClose.addEventListener('click', ()=> mapModal.classList.add('hidden'));
-  mapModal.addEventListener('click', (e)=> { if(e.target===mapModal) mapModal.classList.add('hidden') });
-
   // Mobile nav toggle
   const burger = document.getElementById('burger');
   const nav = document.getElementById('primaryNav');
@@ -153,7 +78,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     });
   });
 
-  // Micro-interactions
+  // Micro-interactions: subtle tilt on hover for feature cards
   document.querySelectorAll('.feature-card').forEach(card=>{
     card.addEventListener('mousemove', (e)=>{
       const rect = card.getBoundingClientRect();
