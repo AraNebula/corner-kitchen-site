@@ -1,15 +1,22 @@
 const dishes = [
-  {name:'Quesa-Birria Taco', tag:'Quesa-Birria', img:'Quesa-Birria-Taco.jpg'},
-  {name:'Barbacoa Melt', tag:'Barbacoa', img:'Barbacoa-Melt.jpg'},
-  {name:'Birria Eggrolls', tag:'Birria', img:'Birria-Eggrolls.jpg'},
-  {name:'Chori Queso Fries', tag:'Choriqueso', img:'Chori-Queso-Fries.jpg'},
-  {name:'Nashville Hot Chicken', tag:'Nashville Hot', img:'Nashville-Hot-Chicken-Burrito.jpg'},
-  {name:'Bang Bang Chicken Sando', tag:'Bang Bang', img:'Bang-Bang-Chicken-Sando.jpg'},
-  {name:'Loaded Fries', tag:'Fries', img:'Loaded-Fries.jpg'},
-  {name:'Crab Rangoon Fries', tag:'Rangoon', img:'Crab-Rangoon-Fries.jpg'},
-  {name:'Sweet Corn Crème Brûlée', tag:'Dessert', img:'Sweet-Corn-Creme-Brulee.jpg'},
+  {name:'Quesa-Birria Taco', tag:'Taco', img:'Quesa-Birria-Taco.jpg'},
+  {name:'Quesa Taco', tag:'Taco', img:'Quesa-Taco.jpg'},
+  {name:'Barbacoa Melt', tag:'Handheld', img:'Barbacoa-Melt.jpg'},
+  {name:'Birria Eggrolls', tag:'Appetizer', img:'Birria-Eggrolls.jpg'},
+  {name:'Breakfast Burrito', tag:'Burrito', img:'Breakfast-Burrito.jpg'},
+  {name:'Nashville Hot Chicken Burrito', tag:'Burrito', img:'Nashville-Hot-Chicken-Burrito.jpg'},
+  {name:'Bang Bang Chicken Sando', tag:'Handheld', img:'Bang-Bang-Chicken-Sando.jpg'},
+  {name:'Loaded Fries', tag:'Side', img:'Loaded-Fries.jpg'},
+  {name:'Crab Rangoon Fries', tag:'Side', img:'Rangoon-Fries.jpg'},
+  {name:'Chori Queso Fries', tag:'Side', img:'Chori-Queso-Fries.jpg'},
+  {name:'Chilaquiles with Red and Green Sauce', tag:'Brunch', img:'Chilaquiles-with-Red-and-Green-Sauce.jpg'},
+  {name:'Cheesy Ramen', tag:'Bowl', img:'Cheesy-Ramen.jpg'},
   {name:'Tres Leches Cake', tag:'Dessert', img:'Tres-Leches-Cake.jpg'},
-  {name:'Mango Margarita', tag:'Drink', img:'Mango-Margarita.jpg'}
+  {name:'Mango Margarita', tag:'Drink', img:'Mango-Margarita.jpg'},
+  {name:'Vanilla Pancakes', tag:'Brunch', img:'Vanilla-Pancakes.jpg'},
+  {name:'Elota Balls', tag:'Side', img:'Elota-Balls.jpg'},
+  {name:'Candied Walnuts', tag:'Side', img:'Candied-Walnuts.jpg'},
+  {name:'Birria Benny Sub Chorizo', tag:'Handheld', img:'Birria-Benny-Sub-Chorizo.jpg'}
 ];
 
 document.addEventListener('DOMContentLoaded', ()=> {
@@ -63,10 +70,12 @@ document.addEventListener('DOMContentLoaded', ()=> {
   // Mobile nav toggle
   const burger = document.getElementById('burger');
   const nav = document.getElementById('primaryNav');
-  burger.addEventListener('click', ()=>{
-    nav.classList.toggle('open');
-    nav.style.display = nav.classList.contains('open') ? 'flex' : '';
-  });
+  if(burger && nav){
+    burger.addEventListener('click', ()=>{
+      nav.classList.toggle('open');
+      nav.style.display = nav.classList.contains('open') ? 'flex' : '';
+    });
+  }
 
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
@@ -74,11 +83,14 @@ document.addEventListener('DOMContentLoaded', ()=> {
       const href = a.getAttribute('href');
       if(!href || href === '#') return;
       const target = document.querySelector(href);
-      if(target){ ev.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
+      if(target){ 
+        ev.preventDefault(); 
+        target.scrollIntoView({behavior:'smooth',block:'start'}); 
+      }
     });
   });
 
-  // Micro-interactions: subtle tilt on hover for feature cards
+  // Subtle tilt on hover for feature cards
   document.querySelectorAll('.feature-card').forEach(card=>{
     card.addEventListener('mousemove', (e)=>{
       const rect = card.getBoundingClientRect();
