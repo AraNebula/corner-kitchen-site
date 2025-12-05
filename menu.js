@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('yearMenu').textContent = new Date().getFullYear();
 
-  // price map based on provided updated menu prices
+  // price map
   const priceMap = {
     // Brunch
     'Chilaquiles':'$14.50',
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     'Elote Bites (3)':'$8.00',
     'Kimchi Brussel Sprouts':'$9.00',
     'Korean Esquites':'$8.00',
-    // Noodles
+    // Noodles / Bowls
     'Chipotle Miso Ramen':'$16.50',
     'Dan Dan Noodles':'$16.00',
     'Loaded Mac & Cheese':'$15.00',
@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     // Desserts
     'ChocoFlan':'$6.00',
     'Tres Leches Cake':'$7.00',
+    'Sweet Corn Crème Brûlée':'$6.50',
     // Fries / fry-sides
     'Side of Fries':'$3.50',
     'Tater Tots':'$4.00',
@@ -65,41 +66,63 @@ document.addEventListener('DOMContentLoaded', ()=>{
     'Nashville Burrito (Truck)':'$13.00',
     'Quesadilla (Truck)':'$12.00',
     'Rangoon Fries (Truck)':'$9.00',
-    'Asada Fries (Truck)':'$9.00'
+    'Asada Fries (Truck)':'$9.00',
+    'Mango Margarita':'$8.00'
   };
 
+  // helper for items
   const sample = (name, img) => {
     const price = priceMap[name] || priceMap[name.replace(/\s*\(.*\)/,'')] || '$12.99';
     return {name, img, price, desc:'Generous portion with signature sauce.'};
   };
 
-  // ---- Updated image paths (no leading slash, spaces URL-encoded) ----
+  // ---- All menu items with correct filenames & URL-encoded spaces ----
   const tacos = [
     sample('Quesa-Birria','Quesa-Birria%20Taco.jpg'),
     sample('Quesa Taco','Quesa%20Taco.jpg'),
     sample('Barbacoa Melt','Barbacoa%20Melt.jpg'),
     sample('Birria Eggrolls','Birria%20Eggrolls.jpg'),
+    sample('Taco de Asada','Taco%20de%20Asada.jpg'),
+    sample('TJ Shrimp Taco','TJ%20Shrimp%20Taco.jpg'),
+    sample('Korean Pork Taco','Korean%20Pork%20Taco.jpg'),
+    sample('Sriracha Chicken Taco','Sriracha%20Chicken%20Taco.jpg'),
   ];
+
   const burritos = [
     sample('Classic Burrito','Breakfast%20Burrito.jpg'),
     sample('Nashville Chicken Burrito','Nashville%20Hot%20Chicken%20Burrito.jpg'),
-  ];
-  const bowls = [
-    sample('Cheesy Rice Bowl','Cheesy%20Ramen.jpg')
-  ];
-  const sides = [
-    sample('Chori-Queso Fries (Large)','Chori%20Queso%20Fries.jpg'),
-    sample('Loaded Fries','Loaded%20Fries.jpg')
-  ];
-  const specials = [
-    sample('Bang Bang Chicken Sando','Bang%20Bang%20Chicken%20Sando.jpg')
-  ];
-  const drinks = [
-    sample('Mango Margarita','Mango%20Margarita.jpg')
+    sample('Chilango Burrito','Chilango%20Burrito.jpg'),
+    sample('Asada Burrito','Asada%20Burrito.jpg'),
   ];
 
+  const bowls = [
+    sample('Cheesy Rice Bowl','Cheesy%20Ramen.jpg'),
+    sample('Chipotle Miso Ramen','Chipotle%20Miso%20Ramen.jpg'),
+    sample('Dan Dan Noodles','Dan%20Dan%20Noodles.jpg'),
+    sample('Loaded Mac & Cheese','Loaded%20Mac%20%26%20Cheese.jpg'),
+    sample('Spicy Shrimp Fried Rice','Spicy%20Shrimp%20Fried%20Rice.jpg'),
+  ];
+
+  const sides = [
+    sample('Chori-Queso Fries (Large)','Chori%20Queso%20Fries.jpg'),
+    sample('Loaded Fries','Loaded%20Fries.jpg'),
+    sample('Rangoon Fries (Large)','Rangoon%20Fries.jpg'),
+    sample('Elote Tots (Large)','Elota%20Balls.jpg'),
+    sample('Papas A La Mexicana (Large)','Papas%20A%20La%20Mexicana.jpg'),
+  ];
+
+  const specials = [
+    sample('Bang Bang Chicken Sando','Bang%20Bang%20Chicken%20Sando.jpg'),
+  ];
+
+  const drinks = [
+    sample('Mango Margarita','Mango%20Margarita.jpg'),
+  ];
+
+  // render function
   function renderList(list, elId){
     const el = document.getElementById(elId);
+    el.innerHTML = ''; // clear existing
     list.forEach(item=>{
       const card = document.createElement('div');
       card.className='feature-card';
@@ -107,6 +130,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       el.appendChild(card);
     });
   }
+
   renderList(tacos, 'tacosGrid');
   renderList(burritos, 'burritosGrid');
   renderList(bowls, 'bowlsGrid');
