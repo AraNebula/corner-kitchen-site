@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById('yearMenu').textContent = new Date().getFullYear();
 
-  // price map based on provided updated menu prices
   const priceMap = {
     // Brunch
     'Chilaquiles':'$14.50',
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     // Desserts
     'ChocoFlan':'$6.00',
     'Tres Leches Cake':'$7.00',
-    // Fries / fry-sides (choose larger price where a dual price exists)
+    // Fries / fry-sides
     'Side of Fries':'$3.50',
     'Tater Tots':'$4.00',
     'Papas A La Mexicana (Large)':'$11.00',
@@ -60,50 +59,4 @@ document.addEventListener('DOMContentLoaded', ()=>{
     'Tacos Asada':'$3.00',
     'Tacos Korean Pork':'$3.00',
     'Tacos Quesabirria':'$3.00',
-    'Tacos Sriracha Chicken':'$3.00',
-    'Bang Bang Chicken Sando (Truck)':'$13.50',
-    'Nashville Burrito (Truck)':'$13.00',
-    'Quesadilla (Truck)':'$12.00',
-    'Rangoon Fries (Truck)':'$9.00',
-    'Asada Fries (Truck)':'$9.00'
-  };
-
-  const sample = (name, img) => {
-    const price = priceMap[name] || priceMap[name.replace(/\s*\(.*\)/,'')] || '$12.99';
-    return {name, img, price, desc:'Generous portion with signature sauce.'};
-  };
-
-  const tacos = [
-    sample('Quesa-Birria','/Quesa-Birria Taco.jpg'),
-    sample('Quesa Taco','/Quesa Taco.jpg'),
-    sample('Barbacoa Melt','/Barbacoa Melt.jpg'),
-    sample('Birria Eggrolls','/Birria Eggrolls.jpg'),
-  ];
-  const burritos = [
-    sample('Classic Burrito','/Breakfast Burrito.jpg'),
-    sample('Nashville Chicken Burrito','/Nashville Hot Chicken Burrito.jpg'),
-  ];
-  const bowls = [sample('Cheesy Rice Bowl','/Cheesy Ramen.jpg')];
-  const sides = [
-    sample('Chori-Queso Fries (Large)','/Chori Queso Fries.jpg'),
-    sample('Loaded Fries','/Loaded Fries.jpg')
-  ];
-  const specials = [sample('Bang Bang Chicken Sando','/Bang Bang Chicken Sando.jpg')];
-  const drinks = [sample('Mango Margarita','/Mango Margarita.jpg')];
-
-  function renderList(list, elId){
-    const el = document.getElementById(elId);
-    list.forEach(item=>{
-      const card = document.createElement('div');
-      card.className='feature-card';
-      card.innerHTML = `<img src="${item.img}" alt="${item.name}" /><h4>${item.name} <span style="float:right;color:var(--gold)">${item.price}</span></h4><p style="color:var(--muted)">${item.desc}</p>`;
-      el.appendChild(card);
-    });
-  }
-  renderList(tacos, 'tacosGrid');
-  renderList(burritos, 'burritosGrid');
-  renderList(bowls, 'bowlsGrid');
-  renderList(sides, 'sidesGrid');
-  renderList(specials, 'specialsGrid');
-  renderList(drinks, 'drinksGrid');
-});
+    'Tacos Sriracha
