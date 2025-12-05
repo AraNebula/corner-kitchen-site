@@ -13,23 +13,35 @@ function starHTML(r){
   for(let i=0;i<full;i++) out += '★';
   if(half) out += '☆';
   while(out.length<5) out += '☆';
-  return `<span class=\"stars\" style=\"color:var(--gold);font-weight:800\">${out}</span>`;
+  return `<span class="stars" style="color:var(--gold);font-weight:800">${out}</span>`;
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
+  // Set current year
   document.getElementById('yrRev').textContent = new Date().getFullYear();
+
   const grid = document.getElementById('reviewsGrid');
+
   function render(list){
     grid.innerHTML = '';
     list.forEach(r=>{
       const card = document.createElement('div');
       card.className='review-card';
-      card.innerHTML = `<div style=\"display:flex;justify-content:space-between;align-items:center;margin-bottom:8px\"><strong style=\"color:#fff\">${r.tag.toUpperCase()}</strong>${starHTML(r.rating)}</div><p style=\"margin:0;color:var(--muted)\">${r.text}</p>`;
+      card.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong style="color:#fff">${r.tag.toUpperCase()}</strong>
+          ${starHTML(r.rating)}
+        </div>
+        <p style="margin:0;color:var(--muted)">${r.text}</p>
+      `;
       grid.appendChild(card);
     });
   }
+
+  // Initial render
   render(sampleReviews);
 
+  // Filter buttons
   document.querySelectorAll('.btn.secondary[data-filter]').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const f = btn.dataset.filter;
