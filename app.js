@@ -1,15 +1,15 @@
 const dishes = [
-  {name:'Quesa-Birria Taco', tag:'Quesa-Birria', img:'/Quesa-Birria Taco.jpg'},
-  {name:'Barbacoa Melt', tag:'Barbacoa', img:'/Barbacoa Melt.jpg'},
-  {name:'Birria Eggrolls', tag:'Birria', img:'/Birria Eggrolls.jpg'},
-  {name:'Chori Queso Fries', tag:'Choriqueso', img:'/Chori Queso Fries.jpg'},
-  {name:'Nashville Hot Chicken', tag:'Nashville Hot', img:'/Nashville Hot Chicken Burrito.jpg'},
-  {name:'Bang Bang Chicken Sando', tag:'Bang Bang', img:'/Bang Bang Chicken Sando.jpg'},
-  {name:'Loaded Fries', tag:'Fries', img:'/Loaded Fries.jpg'},
-  {name:'Crab Rangoon Fries', tag:'Rangoon', img:'/Crab Rangoon Fries.jpg'},
-  {name:'Sweet Corn Crème Brûlée', tag:'Dessert', img:'/Sweet Corn Creme Brulee.jpg'},
-  {name:'Tres Leches Cake', tag:'Dessert', img:'/Tres Leches Cake.jpg'},
-  {name:'Mango Margarita', tag:'Drink', img:'/Mango Margarita.jpg'}
+  {name:'Quesa-Birria Taco', tag:'Quesa-Birria', img:'Quesa-Birria Taco.jpg'},
+  {name:'Barbacoa Melt', tag:'Barbacoa', img:'Barbacoa Melt.jpg'},
+  {name:'Birria Eggrolls', tag:'Birria', img:'Birria Eggrolls.jpg'},
+  {name:'Chori Queso Fries', tag:'Choriqueso', img:'Chori Queso Fries.jpg'},
+  {name:'Nashville Hot Chicken', tag:'Nashville Hot', img:'Nashville Hot Chicken Burrito.jpg'},
+  {name:'Bang Bang Chicken Sando', tag:'Bang Bang', img:'Bang Bang Chicken Sando.jpg'},
+  {name:'Loaded Fries', tag:'Fries', img:'Loaded Fries.jpg'},
+  {name:'Crab Rangoon Fries', tag:'Rangoon', img:'Crab Rangoon Fries.jpg'},
+  {name:'Sweet Corn Crème Brûlée', tag:'Dessert', img:'Sweet Corn Creme Brulee.jpg'},
+  {name:'Tres Leches Cake', tag:'Dessert', img:'Tres Leches Cake.jpg'},
+  {name:'Mango Margarita', tag:'Drink', img:'Mango Margarita.jpg'}
 ];
 
 document.addEventListener('DOMContentLoaded', ()=> {
@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
       <img loading="lazy" src="${d.img}" alt="${d.name}" />
       <div class="dish-tag">${d.tag}</div>
     `;
-    // center each card and layer with smaller vertical offset/rotation while preserving centering
     el.style.transform = `translate(-50%,-50%) translateY(${i*8}px) rotate(${(i-2)*1.2}deg) scale(${1 - i*0.02})`;
     rotator.appendChild(el);
   });
@@ -38,13 +37,11 @@ document.addEventListener('DOMContentLoaded', ()=> {
     active = (active+1)%items.length;
     items[active].classList.add('active');
 
-    // ensure non-active items keep their centered stacked transforms after class change
     items.forEach((it, idx) => {
       if(!it.classList.contains('active')){
         it.style.transform = `translate(-50%,-50%) translateY(${idx*8}px) rotate(${(idx-2)*1.2}deg) scale(${1 - idx*0.02})`;
         it.style.zIndex = 20 - idx;
       } else {
-        // active item gets a slight scale/rotation handled by CSS .dish.active
         it.style.zIndex = 30;
       }
     });
@@ -64,13 +61,11 @@ document.addEventListener('DOMContentLoaded', ()=> {
   });
 
   // Lazy load map iframe on demand
-  // Order modal: attempt to embed Clover ordering inside the site's modal; if embedding is blocked, fall back to opening a new tab
   const orderBtns = document.querySelectorAll('#orderBtn, #heroOrder, #menuOrderBtn');
-  const mapModal = document.getElementById('mapModal'); // reused modal container
+  const mapModal = document.getElementById('mapModal');
   const mapEmbed = document.getElementById('mapEmbed');
   const modalClose = document.getElementById('modalClose');
 
-  // Helper to show fallback (open in new tab) and close modal
   function fallbackOpen(url){
     window.open(url, '_blank', 'noopener');
     mapModal.classList.add('hidden');
@@ -82,19 +77,15 @@ document.addEventListener('DOMContentLoaded', ()=> {
       const url = b.dataset.orderUrl || b.getAttribute('href');
       if(!url) return fallbackOpen('https://www.clover.com/online-ordering/corner-kitchen-south-omaha');
 
-      // If the target is Clover (commonly blocked from embedding), skip iframe attempt and open directly
       try {
         const parsed = new URL(url, window.location.href);
         if (parsed.hostname.includes('clover.com')) {
           return fallbackOpen(url);
         }
-      } catch (err) {
-        // ignore parse errors and continue to iframe attempt
-      }
+      } catch (err) {}
 
-      // Show modal and insert iframe
       mapModal.classList.remove('hidden');
-      mapEmbed.innerHTML = ''; // clear previous content
+      mapEmbed.innerHTML = '';
 
       const iframe = document.createElement('iframe');
       iframe.src = url;
@@ -103,41 +94,30 @@ document.addEventListener('DOMContentLoaded', ()=> {
       iframe.style.height = '640px';
       iframe.style.border = '0';
       iframe.referrerPolicy = 'no-referrer';
-      // add a small attribute to reduce some embed restrictions (won't bypass X-Frame-Options)
-      iframe.sandbox = ''; // start restrictive; remove if loaded successfully
+      iframe.sandbox = '';
 
       let loaded = false;
-      const loadTimeout = 1800; // ms
+      const loadTimeout = 1800;
 
-      // If the frame loads successfully, remove sandbox to allow interactive behavior
       iframe.addEventListener('load', () => {
         loaded = true;
-        // Some browsers will fire load even when blocked; check contentWindow access
         try {
-          // Accessing location.href will throw if cross-origin/frame is blocked; use a safe check
           const cw = iframe.contentWindow;
           if (cw && typeof cw.location !== 'undefined') {
-            // remove sandbox attribute to allow normal interaction (if allowed)
             iframe.removeAttribute('sandbox');
           }
-        } catch (err) {
-          // ignore — cross-origin access not allowed, but load succeeded visually
-        }
+        } catch (err) {}
       });
 
-      // Append iframe immediately so browser attempts to load
       mapEmbed.appendChild(iframe);
 
-      // If load doesn't happen within timeout, assume it's blocked and fallback
       const t = setTimeout(() => {
         if (!loaded) {
-          // Remove iframe and open in new tab
           mapEmbed.innerHTML = '';
           fallbackOpen(url);
         }
       }, loadTimeout);
 
-      // Clean-up: if modal closed manually cancel timeout
       const cleanup = () => {
         clearTimeout(t);
         mapEmbed.innerHTML = '';
@@ -167,14 +147,13 @@ document.addEventListener('DOMContentLoaded', ()=> {
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click', (ev)=>{
       const href = a.getAttribute('href');
-      // ignore plain '#' or empty href which are not valid selectors / are placeholders
       if(!href || href === '#') return;
       const target = document.querySelector(href);
       if(target){ ev.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
     });
   });
 
-  // Micro-interactions: subtle tilt on hover for feature cards
+  // Micro-interactions
   document.querySelectorAll('.feature-card').forEach(card=>{
     card.addEventListener('mousemove', (e)=>{
       const rect = card.getBoundingClientRect();
@@ -184,5 +163,4 @@ document.addEventListener('DOMContentLoaded', ()=> {
     });
     card.addEventListener('mouseleave', ()=> card.style.transform='translateY(0)');
   });
-
 });
