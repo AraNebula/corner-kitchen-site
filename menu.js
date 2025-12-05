@@ -64,48 +64,32 @@ document.addEventListener('DOMContentLoaded', ()=>{
   };
 
   const tacos = [
-    sample('Quesa-Birria','Quesa-Birria Taco.jpg'),
-    sample('Quesa Taco','Quesa Taco.jpg'),
-    sample('Barbacoa Melt','Barbacoa Melt.jpg'),
-    sample('Birria Eggrolls','Birria Eggrolls.jpg')
+    sample('Quesa-Birria','/Quesa-Birria%20Taco.jpg'),
+    sample('Quesa Taco','/Quesa%20Taco.jpg'),
+    sample('Barbacoa Melt','/Barbacoa%20Melt.jpg'),
+    sample('Birria Eggrolls','/Birria%20Eggrolls.jpg'),
   ];
-
   const burritos = [
-    sample('Classic Burrito','Breakfast Burrito.jpg'),
-    sample('Nashville Chicken Burrito','Nashville Hot Chicken Burrito.jpg')
+    sample('Classic Burrito','/Breakfast%20Burrito.jpg'),
+    sample('Nashville Chicken Burrito','/Nashville%20Hot%20Chicken%20Burrito.jpg'),
   ];
-
-  const bowls = [
-    sample('Cheesy Rice Bowl','Cheesy Ramen.jpg')
-  ];
-
+  const bowls = [sample('Cheesy Rice Bowl','/Cheesy%20Ramen.jpg')];
   const sides = [
-    sample('Chori-Queso Fries (Large)','Chori Queso Fries.jpg'),
-    sample('Loaded Fries','Loaded Fries.jpg')
+    sample('Chori-Queso Fries (Large)','/Chori%20Queso%20Fries.jpg'),
+    sample('Loaded Fries','/Loaded%20Fries.jpg')
   ];
-
-  const specials = [
-    sample('Bang Bang Chicken Sando','Bang Bang Chicken Sando.jpg')
-  ];
-
-  const drinks = [
-    sample('Mango Margarita','Mango Margarita.jpg')
-  ];
+  const specials = [sample('Bang Bang Chicken Sando','/Bang%20Bang%20Chicken%20Sando.jpg')];
+  const drinks = [sample('Mango Margarita','/Mango%20Margarita.jpg')];
 
   function renderList(list, elId){
     const el = document.getElementById(elId);
     list.forEach(item=>{
       const card = document.createElement('div');
       card.className='feature-card';
-      card.innerHTML = `
-        <img src="${item.img}" alt="${item.name}" />
-        <h4>${item.name} <span style="float:right;color:var(--gold)">${item.price}</span></h4>
-        <p style="color:var(--muted)">${item.desc}</p>
-      `;
+      card.innerHTML = `<img src="${item.img}" alt="${item.name}" /><h4>${item.name} <span style="float:right;color:var(--gold)">${item.price}</span></h4><p style="color:var(--muted)">${item.desc}</p>`;
       el.appendChild(card);
     });
   }
-
   renderList(tacos, 'tacosGrid');
   renderList(burritos, 'burritosGrid');
   renderList(bowls, 'bowlsGrid');
