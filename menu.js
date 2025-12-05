@@ -9,19 +9,19 @@ document.addEventListener('DOMContentLoaded', ()=> {
     'Bang Bang Chicken Sando':'$14.00',
     'Breakfast Burrito':'$12.50',
     'Nashville Hot Chicken Burrito':'$13.50',
+    'Birria Benny Sub Chorizo':'$12.50',
     'Cheesy Rice Bowl':'$14.00',
     'Chori-Queso Fries (Large)':'$10.00',
     'Loaded Fries':'$9.50',
     'Crab Rangoon Fries':'$10.00',
-    'Mango Margarita':'$8.50',
+    'Rangoon Fries':'$9.50',
+    'Elota Balls':'$8.00',
     'Tres Leches Cake':'$7.00',
     'Sweet Corn Crème Brûlée':'$6.50',
-    'Birria Benny Sub Chorizo':'$12.50',
-    'Chilaquiles with Red and Green Sauce':'$14.50',
-    'Elota Balls':'$8.00',
     'Vanilla Pancakes':'$9.00',
     'Candied Walnuts':'$5.00',
-    'Rangoon Fries':'$9.50'
+    'Mango Margarita':'$8.50',
+    'Chilaquiles with Red and Green Sauce':'$14.50'
   };
 
   const sample = (name, img) => {
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     return {name, img, price, desc:'Generous portion with signature sauce.'};
   };
 
-  // only include items for which images exist
+  // Only include items that actually exist in your repo
   const tacos = [
     sample('Quesa-Birria','Quesa-Birria-Taco.jpg'),
     sample('Quesa Taco','Quesa-Taco.jpg'),
@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
   function renderList(list, elId){
     const el = document.getElementById(elId);
+    if(!el) return; // skip if div doesn't exist
     list.forEach(item=>{
       const card = document.createElement('div');
       card.className='feature-card';
@@ -89,6 +90,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
   renderList(handhelds, 'specialsGrid'); // reuse specialsGrid for handhelds
   renderList(bowls, 'bowlsGrid');
   renderList(sides, 'sidesGrid');
-  renderList(desserts, 'dessertsGrid'); // you may need to add this div in menu.html
+  renderList(desserts, 'dessertsGrid'); // make sure to add this div in menu.html
   renderList(drinks, 'drinksGrid');
 });
