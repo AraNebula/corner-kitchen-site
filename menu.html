@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Menu — Corner Kitchen</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="menu.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/"><img src="/LOGO.png" alt="Corner Kitchen" /></a>
+      <nav class="nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="reviews.html" class="nav-link">Reviews</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-ctas">
+        <a class="btn primary" href="#" id="menuOrderBtn" data-order-url="https://www.clover.com/online-ordering/corner-kitchen-south-omaha" rel="noopener noreferrer">Order Online</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top:28px;padding-bottom:80px">
+    <h1>Menu</h1>
+    <p class="lead">Bold, shareable, craveable — explore our tacos, burritos, bowls & sides.</p>
+
+    <section class="menu-section">
+      <h2>Tacos</h2>
+      <div class="featured-grid" id="tacosGrid"></div>
+    </section>
+
+    <section class="menu-section">
+      <h2>Burritos</h2>
+      <div class="featured-grid" id="burritosGrid"></div>
+    </section>
+
+    <section class="menu-section">
+      <h2>Bowls</h2>
+      <div class="featured-grid" id="bowlsGrid"></div>
+    </section>
+
+    <section class="menu-section">
+      <h2>Sides</h2>
+      <div class="featured-grid" id="sidesGrid"></div>
+    </section>
+
+    <section class="menu-section">
+      <h2>Specials</h2>
+      <div class="featured-grid" id="specialsGrid"></div>
+    </section>
+
+    <section class="menu-section">
+      <h2>Drinks</h2>
+      <div class="featured-grid" id="drinksGrid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><img src="/LOGO.png" alt="logo" /></div>
+      <div class="footer-links"><a href="/">Home</a></div>
+      <div class="footer-meta"><small>© <span id="yearMenu"></span> Corner Kitchen</small></div>
+    </div>
+  </footer>
+</body>
+</html>
+

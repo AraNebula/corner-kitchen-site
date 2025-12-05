@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Corner Kitchen — Bold. Spicy. Unforgettable.</title>
+  <link rel="icon" href="/LOGO.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a class="logo" href="/">
+        <img src="/LOGO.png" alt="Corner Kitchen" />
+      </a>
+      <nav class="nav" id="primaryNav">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="reviews.html" class="nav-link">Reviews</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-ctas">
+        <a class="btn secondary" href="menu.html">View Menu</a>
+        <a class="btn primary" href="#" id="orderBtn" data-order-url="https://www.clover.com/online-ordering/corner-kitchen-south-omaha" rel="noopener noreferrer">Order Online</a>
+      </div>
+      <button id="burger" class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-inner container">
+        <div class="hero-copy">
+          <h1>Bold. Spicy. Unforgettable. <span class="accent">Welcome to Corner Kitchen.</span></h1>
+          <p class="lead">Omaha’s favorite spot for tacos, burritos, and fusion flavor explosions.</p>
+          <div class="hero-ctas">
+            <a class="btn primary large" href="menu.html">View Menu</a>
+            <a class="btn ghost large" id="heroOrder" href="#" data-order-url="https://www.clover.com/online-ordering/corner-kitchen-south-omaha" rel="noopener noreferrer">Order Online</a>
+          </div>
+          <ul class="why-list">
+            <li><strong>Big portions</strong></li>
+            <li><strong>Fair prices</strong></li>
+            <li><strong>Family-friendly</strong></li>
+            <li><strong>Amazing service</strong></li>
+            <li><strong>Unique fusion dishes</strong></li>
+          </ul>
+        </div>
+        <div class="hero-showcase" aria-hidden="false">
+          <div class="dish-rotator" id="dishRotator">
+            <!-- Rotating food cards injected by JS -->
+          </div>
+        </div>
+      </div>
+      <div class="texture-overlay"></div>
+    </section>
+
+    <section class="reviews-highlights container">
+      <h2>Why Omaha Loves Us</h2>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <p class="quote">“The service was top notch… food demolished instantly by the whole family!”</p>
+        </div>
+        <div class="review-card">
+          <p class="quote">“This place blew other Mexican restaurants out of the water.”</p>
+        </div>
+        <div class="review-card">
+          <p class="quote">“Inconspicuous location but incredible food and huge portions.”</p>
+        </div>
+        <div class="review-card">
+          <p class="quote">“I would stop here often if I lived in Omaha.”</p>
+        </div>
+        <div class="review-card">
+          <p class="quote">“Corner Kitchen knocked it out of the park.”</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured-menu container">
+      <div class="section-head">
+        <h2>Showcase</h2>
+        <p>Signature dishes & fan favorites</p>
+      </div>
+      <div class="featured-grid" id="featuredGrid">
+        <!-- injected items -->
+      </div>
+    </section>
+
+    <section class="cta-split">
+      <div class="cta-left">
+        <h3>Hungry? Let’s eat.</h3>
+        <p>Fast pickup or delivery — same bold flavors.</p>
+      </div>
+      <div class="cta-right">
+        <a class="btn primary large" href="#order">Order Online</a>
+        <a class="btn secondary large" href="menu.html">View Full Menu</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="/LOGO.png" alt="Corner Kitchen" />
+        <p>Corner Kitchen — street-food luxury in Omaha.</p>
+      </div>
+      <div class="footer-links">
+        <a href="menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-meta">
+        <div class="socials">
+          <a href="https://www.instagram.com/cornerkitchenoma/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social">IG</a>
+          <a href="https://www.facebook.com/cornerkitchenoma" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social">FB</a>
+          <a href="https://www.tiktok.com/@cornerkitchenomaha?lang=en" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="social">TT</a>
+        </div>
+        <small>© <span id="year"></span> Corner Kitchen — Omaha, NE</small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Light DOM modal for map / order placeholders -->
+  <div id="mapModal" class="modal hidden">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div id="mapEmbed" class="map-embed">
+        <!-- map iframe injected on demand to optimize load -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>

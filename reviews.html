@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reviews — Corner Kitchen</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="reviews.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/"><img src="/LOGO.png" alt="Corner Kitchen" /></a>
+      <nav class="nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top:28px;padding-bottom:80px">
+    <h1>Reviews</h1>
+    <p class="lead">What people are saying — curated highlights from happy guests.</p>
+
+    <div class="filter-row" style="display:flex;gap:8px;margin-top:12px;">
+      <button class="btn secondary" data-filter="all">All</button>
+      <button class="btn secondary" data-filter="tacos">Tacos</button>
+      <button class="btn secondary" data-filter="burritos">Burritos</button>
+      <button class="btn secondary" data-filter="family">Family-friendly</button>
+      <button class="btn secondary" data-filter="spicy">Spicy</button>
+      <button class="btn secondary" data-filter="service">Service</button>
+      <button class="btn secondary" data-filter="portions">Portions</button>
+    </div>
+
+    <div id="reviewsGrid" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner"><div class="footer-brand"><img src="/LOGO.png" alt="logo" /></div><div class="footer-meta"><small>© <span id="yrRev"></span> Corner Kitchen</small></div></div>
+  </footer>
+</body>
+</html>
+

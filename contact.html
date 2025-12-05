@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact & Location — Corner Kitchen</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer>
+    document.addEventListener('DOMContentLoaded', ()=> {
+      document.getElementById('yearContact').textContent = new Date().getFullYear();
+      // quick tap-to-call on mobile
+      document.getElementById('callBtn').addEventListener('click', ()=> location.href='tel:+14025551234');
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/"><img src="/LOGO.png" alt="Corner Kitchen" /></a>
+      <nav class="nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="reviews.html" class="nav-link">Reviews</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top:28px;padding-bottom:80px">
+    <h1>Contact & Location</h1>
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-top:18px">
+      <div class="feature-card">
+        <h3>Find us</h3>
+        <p>Corner Kitchen — Omaha, NE</p>
+        <p><strong>Hours</strong><br/>Mon–Thu 11:00–21:00<br/>Fri–Sat 11:00–22:00<br/>Sun 11:00–20:00</p>
+        <p style="margin-top:8px">
+          <a id="orderNow" class="btn primary" href="https://www.clover.com/online-ordering/corner-kitchen-south-omaha" target="_blank" rel="noopener noreferrer">Order Online</a>
+          <button id="callBtn" class="btn secondary">Call Us</button>
+        </p>
+      </div>
+      <div class="feature-card" style="padding:0;overflow:hidden">
+        <iframe loading="lazy" src="https://www.google.com/maps?q=Corner+Kitchen+Omaha&output=embed" style="width:100%;height:100%;min-height:260px;border:0"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner"><div class="footer-brand"><img src="/LOGO.png" alt="logo" /></div><div class="footer-meta"><small>© <span id="yearContact"></span> Corner Kitchen</small></div></div>
+  </footer>
+</body>
+</html>
