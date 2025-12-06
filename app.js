@@ -20,27 +20,34 @@ const dishes = [
 ];
 
 document.addEventListener('DOMContentLoaded', ()=> {
-  // year
+
+  /* ---------------- YEAR ---------------- */
   const year = new Date().getFullYear();
   document.getElementById('year').textContent = year;
 
-  // Dish rotator
+
+  /* ---------------- DISH ROTATOR ---------------- */
   const rotator = document.getElementById('dishRotator');
+
   dishes.slice(0,5).forEach((d,i)=>{
     const el = document.createElement('div');
     el.className='dish'+(i===0?' active':'');
+
     el.style.zIndex = 20 - i;
     el.innerHTML = `
       <img loading="lazy" src="${d.img}" alt="${d.name}" />
       <div class="dish-tag">${d.tag}</div>
     `;
+
     el.style.transform = `translate(-50%,-50%) translateY(${i*8}px) rotate(${(i-2)*1.2}deg) scale(${1 - i*0.02})`;
     rotator.appendChild(el);
   });
+
   let active = 0;
   setInterval(()=>{
     const items = rotator.querySelectorAll('.dish');
     items[active].classList.remove('active');
+
     active = (active+1)%items.length;
     items[active].classList.add('active');
 
@@ -54,8 +61,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
     });
   },3500);
 
-  // Featured grid
+
+  /* ---------------- FEATURED GRID ---------------- */
   const featured = document.getElementById('featuredGrid');
+
   dishes.forEach(d=>{
     const card = document.createElement('article');
     card.className='feature-card';
@@ -67,9 +76,11 @@ document.addEventListener('DOMContentLoaded', ()=> {
     featured.appendChild(card);
   });
 
-  // Mobile nav toggle
+
+  /* ---------------- MOBILE NAV TOGGLE ---------------- */
   const burger = document.getElementById('burger');
   const nav = document.getElementById('primaryNav');
+
   if(burger && nav){
     burger.addEventListener('click', ()=>{
       nav.classList.toggle('open');
@@ -77,27 +88,47 @@ document.addEventListener('DOMContentLoaded', ()=> {
     });
   }
 
-  // Smooth scroll for anchor links
+
+  /* ---------------- SMOOTH SCROLL ---------------- */
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', (ev)=>{
+    a.addEventListener('click', ev=>{
       const href = a.getAttribute('href');
-      if(!href || href === '#') return;
+
+      // DO NOT hijack links that are literally "#"
+      if(href === "#" || !href) return;
+
       const target = document.querySelector(href);
-      if(target){ 
-        ev.preventDefault(); 
-        target.scrollIntoView({behavior:'smooth',block:'start'}); 
+      if(target){
+        ev.preventDefault();
+        target.scrollIntoView({behavior:'smooth',block:'start'});
       }
     });
   });
 
-  // Subtle tilt on hover for feature cards
+
+  /* ---------------- ORDER ONLINE BUTTONS ---------------- */
+  document.querySelectorAll('[data-order-url]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = btn.getAttribute('data-order-url');
+      if (url) window.open(url, '_blank');
+    });
+  });
+
+
+  /* ---------------- FEATURE CARD TILT ---------------- */
   document.querySelectorAll('.feature-card').forEach(card=>{
     card.addEventListener('mousemove', (e)=>{
       const rect = card.getBoundingClientRect();
       const dx = (e.clientX - rect.left - rect.width/2)/(rect.width/2);
       const dy = (e.clientY - rect.top - rect.height/2)/(rect.height/2);
+
       card.style.transform = `rotateX(${dy*4}deg) rotateY(${dx*-6}deg) translateY(-8px)`;
     });
-    card.addEventListener('mouseleave', ()=> card.style.transform='translateY(0)');
+
+    card.addEventListener('mouseleave', ()=>{
+      card.style.transform = 'translateY(0)';
+    });
   });
+
 });
